@@ -1,6 +1,7 @@
 typeset -A errors
 errors=(
-  $'BADOPT\t'"bad option"
+  [BADOPT]="bad option"
+  [NO_IRODS]="no 'irods' user"
 )
 
 die() {
