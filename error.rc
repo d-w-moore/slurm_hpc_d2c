@@ -1,0 +1,8 @@
+typeset -A errors
+errors=(
+  [1]="error1"
+  )
+
+die() {
+  
+}
