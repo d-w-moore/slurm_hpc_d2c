@@ -1,9 +1,14 @@
-typeset -A errors
+typeset -A errors erridx
 errors=(
-  [BADOPT]="bad option"
-  [NO_IRODS]="no 'irods' user"
+  [001_BAD_OPTION]="bad command line argument or option"
+  [002_NEED_IRODS_USER]="no 'irods' user; pls install & run irods server first"
 )
+j=0
+for i in ${!errors[*]}
+do
+  erridx[$i]=$((++j))
+done
 
 die() {
-  echo >&2 "$1 - ${errors[$1]}" ;exit $1
+  echo >&2 "$1 - ${errors[$1]}" ;exit ${erridx[$1]}
 }
