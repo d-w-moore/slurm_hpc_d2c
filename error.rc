@@ -8,7 +8,7 @@ add_error() {
   local CODE=$1 MSG="$2"
   errors+=( "$MSG" )
   errMsgIdx[$CODE]=$((erridx++))
-)
+}
 
 die() {
   local n=${errMsgIdx[$1]}
