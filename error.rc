@@ -20,4 +20,4 @@ die() {
 }
 
 add_error BAD_OPTION     "Error in program option or argument"  # 1
-add_error NO_IRODS_USER  "No irods user - pls install server"   # 2
+add_error NO_IRODS_USER  "No irods user (please install server)"   # 2
