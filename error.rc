@@ -1,3 +1,4 @@
+# source this file in Bash v >=4
 
 typeset -A errMsgIdx
 erridx=0
