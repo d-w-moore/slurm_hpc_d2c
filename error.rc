@@ -1,8 +1,8 @@
 # source this file in Bash v >=4
 
 typeset -A errMsgIdx
-erridx=0
-errors=()
+erridx=1
+errors=("")
 
 add_error() {
   local CODE=$1 MSG="$2"
@@ -16,7 +16,7 @@ die() {
     { 
     echo "dying on no particular error" >&2 ; exit 127
     }
-  echo $1 "- ${errors[$n]}" >&2 ; exit ${erridx[$1]}
+  echo $1": ${errors[$n]}" >&2 ; exit ${erridx[$1]}
 }
 
 add_error BAD_OPTION     "Error in program option or argument"  # 1
