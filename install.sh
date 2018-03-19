@@ -2,7 +2,7 @@
 
 DIR=$(dirname "$0")
 . "$DIR/error.rc"
-#cd "$DIR"
+# cd "$DIR"
 
 grep -w irods /etc/passwd >/dev/null 2>&1 || die NO_IRODS_USER
 
@@ -21,6 +21,7 @@ mkdir -p ~/github
 
 [ $? -eq 0 ] || die MUNGE_BUILD
 
+
 # ============================================================================
 
 if ! grep ^munge: /etc/passwd  >/dev/null 2>&1 ; then
@@ -28,7 +29,8 @@ if ! grep ^munge: /etc/passwd  >/dev/null 2>&1 ; then
   sudo adduser --system --group --no-create-home munge && \
   sudo dd if=/dev/urandom of=/etc/munge/munge.key  bs=1k count=1  && \
   sudo chmod 600 /etc/munge/munge.key  && \
-  sudo chown munge:munge /etc/munge/munge.key
+  sudo mkdir -p /var/log/munge #__ /var/run/munge(?)
+  sudo chown munge:munge -R /var/log/munge /etc/munge
 fi
 
 [ $? -eq 0 ] || die MUNGE_USER
@@ -49,24 +51,25 @@ fi
 [ $? -eq 0 ] || die MUNGED_INSTALL
 
 (
-  cd ~/github					&& \
-  git clone http://github.com/SchedMD/slurm.git	&& \
-  cd slurm 					&& \
-  git checkout slurm-17-11-4-1			&& \
-  ./configure --with-munge=/usr			&& \
-  make						&& \
-  make check					&& \
+  cd ~/github &&\
+  git clone http://github.com/SchedMD/slurm.git &&\
+  cd slurm && \
+  git checkout slurm-17-11-4-1 && \
+  ./configure --with-munge=/usr && \
+  make && \
+  make check && \
   sudo make install
 )
 
 [ $? -eq 0 ] || die SLURM_BUILD
 
-sudo env -i	$(/usr/local/sbin/slurmd -C)			\
-		USER=irods					\
-		perl -pe 's/\$(\w+)/$ENV{$1}/ge unless /^\s*#/'	\
-		< "$DIR"/slurm.conf.template			\
-		> /usr/local/etc/slurm.conf
-
+sudo env -i $(/usr/local/sbin/slurmd -C) \
+                USER=irods \
+                perl -pe 's/\$(\w+)/$ENV{$1}/ge unless /^\s*#/' \
+                < "$DIR"/slurm.conf.template                    \
+                > /tmp/slurm.conf &&\
+sudo cp /tmp/slurm.conf /usr/local/etc &&\
+sudo mkdir -p /var/spool/slurm{d,state} && chown -R irods:irods /var/spool/slurm{d,state}
 [ $? -eq 0 ] || die SLURM_CONFIG
 
 CR=$'\n'
@@ -82,8 +85,8 @@ sleep 2
 if [ $(pgrep 'slurm(ctl|)d' | wc -l) -eq 2 ]; then
   grep slurm /etc/rc.local >/dev/null 2>&1 || 
   sudo env -i SLURMDAEMONS="${SLURM1}${CR}${SLURM2}${CR}" \
-	perl -i.orig -pe 's[(\s*exit\s+0\s*)\n*$][$ENV{SLURMDAEMONS}$1]s' \
-	/etc/rc.local 
+        perl -i.orig -pe 's[(\s*exit\s+0\s*)\n*$][$ENV{SLURMDAEMONS}$1]s' \
+        /etc/rc.local 
 else
   die SLURM_START
 fi
