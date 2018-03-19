@@ -26,7 +26,7 @@ add_error MUNGE_USER     "could not create munge user, group, or key file"	# 4
 add_error MUNGED_START   "could not start munge daemon"				# 5
 add_error MUNGED_INSTALL "could not install munge daemon in start scripts"	# 6
 
-add_error SLURM_BUILD    "SLURM did not build"	# 7
-add_error SLURM_CONFIG    "SLURM did not build"	# 8
-add_error SLURM_START     "SLURM did not build"	# 9
-add_error SLURM_INSTALL   "SLURM did not build"	# 10
+add_error SLURM_BUILD     "SLURM did not build"	# 7
+add_error SLURM_CONFIG    "SLURM could not be configured"	# 8
+add_error SLURM_START     "SLURM could not be started	# 9
+add_error SLURM_INSTALL   "SLURM daemons could not be installed in start scripts"	# 10
