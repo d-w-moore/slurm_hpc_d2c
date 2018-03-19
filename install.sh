@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-#DIR=$(dirname "$0")
-#. "$DIR/error.rc"
+DIR=$(dirname "$0")
+. "$DIR/error.rc"
 
 cd "$DIR"
 
