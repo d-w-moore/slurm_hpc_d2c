@@ -40,5 +40,5 @@ sudo update-rc.d munge defaults
 
 sudo env -i	$(/usr/local/sbin/slurmd -C)	\
 		USER=irods			\
-		perl -pe 's/\$(\w+)/$ENV{$1}/ge' < slurm.conf.template 	\
+		perl -pe 's/\$(\w+)/$ENV{$1}/ge unless /^\s*#/' < slurm.conf.template 	\
 		> /usr/local/etc/slurm.conf
