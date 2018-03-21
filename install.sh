@@ -29,7 +29,7 @@ f_munge_user_install ()
     sudo dd if=/dev/urandom of=/etc/munge/munge.key  bs=1k count=1  && \
     sudo chmod 600 /etc/munge/munge.key  && \
     sudo mkdir -p /var/log/munge && \
-    sudo chown munge:munge -R /var/log/munge /etc/munge && \
+    sudo chown munge:munge -R /var/run/munge /var/log/munge /etc/munge && \
     STATUS=0
   fi
   [ $STATUS -eq 0 ] || warn MUNGE_USER
