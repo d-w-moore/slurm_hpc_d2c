@@ -3,7 +3,7 @@
 DIR=$(dirname "$0")
 . "$DIR/errors.rc"
 
-grep -w '^irods:' /etc/passwd >/dev/null 2>&1 || die NO_IRODS_USER
+grep '^irods:' /etc/passwd >/dev/null 2>&1 || die NO_IRODS_USER
 
 mkdir -p ~/github
 
