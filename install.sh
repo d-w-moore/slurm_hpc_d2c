@@ -94,7 +94,8 @@ f_slurm_install ()
         perl -i.orig -pe 's[(\s*exit\s+0\s*)\n*$][$ENV{SLURMDAEMONS}$1]s' \
         /etc/rc.local 
   else
-    die SLURM_START
+    warn SLURM_START
+    return
   fi
 
   [ $? -eq 0 ] || warn SLURM_INSTALL
