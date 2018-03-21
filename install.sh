@@ -29,7 +29,7 @@ f_munge_user_install ()
     sudo dd if=/dev/urandom of=/etc/munge/munge.key  bs=1k count=1  && \
     sudo chmod 600 /etc/munge/munge.key  && \
     sudo mkdir -p /var/log/munge && \
-    sudo chown munge:munge -R /var/run/munge /var/log/munge /etc/munge && \
+    sudo chown -R munge:munge /var/run/munge /var/log/munge /etc/munge && \
     STATUS=0
   fi
   [ $STATUS -eq 0 ] || warn MUNGE_USER
@@ -42,14 +42,14 @@ f_munge_start ()
   [ $? -eq 0 ] || warn MUNGED_START
 }
 
-f_munge_install ()
+f_munge_daemon_persist ()
 {
   if pgrep munged  2>/dev/null >&2 ; then
     sudo update-rc.d munge defaults
   #else
   #  echo >&2 "Not able to start munge ; aborting install."
   fi
-  [ $? -eq 0 ] || warn MUNGED_INSTALL
+  [ $? -eq 0 ] || warn MUNGED_PERSIST
 }
 
 f_slurm_build ()
@@ -108,7 +108,7 @@ f_munge_user_install    || exit $?
 
 f_munge_start           || exit $?
 
-f_munge_install         || exit $?
+f_munge_daemon_persist  || exit $?
 
 f_slurm_build           || exit $?
 
