@@ -35,7 +35,8 @@ mkdir -p ~/github
 #   - git clone and checkout using e.g.:
 #       http://github.com/dun/munge/
 #       http://github.com/SchedMD/slurm/
-#     (followed by cd into repo and checkout of desired tag)
+#     (followed by cd into repo and checkout of desired tag. Slower,
+#     but could support easy version upgrading with minor script changes)
 #
 #   - wget:
 #       http://github.com/dun/munge/archive/munge-0.5.13.tar.gz
@@ -45,7 +46,7 @@ mkdir -p ~/github
 
 WGET=1
 
-# -- Dictionaries to hold version and URL info
+# -- Dictionaries to hold repository path and preferred version info
 
 typeset -A \
   dlPath=( [munge]="dun/munge" [slurm]="SchedMD/slurm" )\
