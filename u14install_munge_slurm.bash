@@ -30,6 +30,38 @@ grep '^irods:' /etc/passwd >/dev/null 2>&1 || die NO_IRODS_USER
 
 mkdir -p ~/github
 
+# -- These are the versions we'll use at present --
+# git clone and checkout:
+# wget:
+#   http://github.com/dun/munge/archive/munge-0.5.13.tar.gz
+#   http://github.com/SchedMD/slurm/archive/slurm-17-11-4-1.tar.gz
+# -- set to 1 to prefer wget, else use git clone & checkout 
+
+WGET=1
+
+# -- Dictionaries to hold version and URL info
+
+typeset -A \
+  dlPath=( [munge]="dun/munge" [slurm]="SchedMD/slurm" )\
+  dlTag=(  [munge]="munge-0.5.13" [slurm]="slurm-17-11-4-1" )
+
+# -- Helper function to download software --
+
+download() {
+  local pkg="$1" 
+  [ -z "$pkg" ] && exit 125
+  [ -d ".old.$pkg" ] && rm -fr ".old.$pkg"/
+  [ -d "$pkg" ] && mv "$pkg"/ ".old.$pkg"/
+  local fname
+  if [ "$WGET" = "1" ] ; then
+    fname=${dlTag[$pkg]}.tar.gz
+    wget "http://github.com/${dlPath[$pkg]}/archive/$fname" >/dev/null 2>&1 &&\
+    tar xf $fname && mv "$pkg"-*/ "$pkg"
+  else
+    git clone "http://github.com/${dlPath[$pkg]}"
+  fi
+}
+
 # -------------------------------------------
 # The functions that follow are the component
 #   parts of the software install
@@ -42,19 +74,17 @@ f_munge_build () {
   # bash sub-shell to preserve CWD
   (
     cd ~/github && \
-    git clone http://github.com/dun/munge.git && \
+    download munge && \
     cd munge && \
     ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var && \
     make && \
     sudo make install
   )
 
-  # If the make/install chain failed, warn and change our return code
-  # before exiting. See the 'errors.rc' file for symbolic error codes. 
-  # Note, also, that:
-  #   [ $condition ] || { $statements ; }
-  # is the same as:
-  #   if [ ! $condition ] ; then $statements ; fi
+  # Be verbose & change return status if make or install failed.
+  # See the 'errors.rc' file for symbolic error codes. 
+  # Note also, that:  [ $condition ] || { $statements ; }
+  # is the same as:   if [ ! $condition ] ; then $statements ; fi
 
   [ $? -eq 0 ] || warn MUNGE_BUILD
 }
@@ -83,7 +113,7 @@ f_munge_user_install () {
 
 f_munge_start () {
 
-  # -- Start the munge daemon, munged
+  # -- Start the munge daemon
 
   sudo /etc/init.d/munge start
   echo -n "starting 'munge' daemon ..." >&2
@@ -118,9 +148,8 @@ f_slurm_build_install () {
   # bash sub-shell to preserve CWD
   (
     cd ~/github && \
-    git clone http://github.com/SchedMD/slurm.git && \
+    download slurm && \
     cd slurm && \
-    git checkout slurm-17-11-4-1 && \
     ./configure --with-munge=/usr && \
     make -j3 && \
     make check && \
@@ -171,19 +200,53 @@ f_slurm_persist ()
   [ $? -eq 0 ] || warn SLURM_PERSIST
 }
 
+# -------------------------------------------
+
+menu() { echo >&2 \
+"Menu:	1 f_munge_build       
+	2 f_munge_user_install   
+	3 f_munge_start          
+	4 f_munge_daemon_persist 
+	5 f_slurm_build_install  
+	6 f_slurm_config         
+	7 f_slurm_persist
+	Q quit "
+}
+
 #======================== Main part of the script ========================
 
-f_munge_build           || exit $?
+if [ $# -eq 0 ] ; then 
 
-f_munge_user_install    || exit $?
+  f_munge_build           || exit $?
 
-f_munge_start           || exit $?
+  f_munge_user_install    || exit $?
 
-f_munge_daemon_persist  || exit $?
+  f_munge_start           || exit $?
 
-f_slurm_build_install   || exit $?
+  f_munge_daemon_persist  || exit $?
 
-f_slurm_config          || exit $?
+  f_slurm_build_install   || exit $?
 
-f_slurm_persist         || exit $?        
+  f_slurm_config          || exit $?
 
+  f_slurm_persist         || exit $?        
+
+else 
+
+  menu
+  while read -p "->" x
+  do
+    case $x in 
+	1) f_munge_build	  ;;
+	2) f_munge_user_install   ;;
+	3) f_munge_start          ;;
+	4) f_munge_daemon_persist ;;
+	5) f_slurm_build_install  ;;
+	6) f_slurm_config         ;;
+	7) f_slurm_persist        ;;
+	[Qq]*) exit 0		  ;;
+	*) menu ;;
+    esac
+    echo "Done.  Choice ($x) finished with status: $?)" >&2
+  done
+fi
