@@ -30,12 +30,18 @@ grep '^irods:' /etc/passwd >/dev/null 2>&1 || die NO_IRODS_USER
 
 mkdir -p ~/github
 
-# -- These are the versions we'll use at present --
-# git clone and checkout:
-# wget:
-#   http://github.com/dun/munge/archive/munge-0.5.13.tar.gz
-#   http://github.com/SchedMD/slurm/archive/slurm-17-11-4-1.tar.gz
-# -- set to 1 to prefer wget, else use git clone & checkout 
+# We'll download source for the build via one of two possible methods: 
+#
+#   - git clone and checkout using e.g.:
+#       http://github.com/dun/munge/
+#       http://github.com/SchedMD/slurm/
+#     (followed by cd into repo and checkout of desired tag)
+#
+#   - wget:
+#       http://github.com/dun/munge/archive/munge-0.5.13.tar.gz
+#       http://github.com/SchedMD/slurm/archive/slurm-17-11-4-1.tar.gz
+#
+# Set WGET to 1 to prefer 'wget', else use 'git' clone & checkout 
 
 WGET=1
 
