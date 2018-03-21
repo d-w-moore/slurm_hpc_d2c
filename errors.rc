@@ -2,11 +2,12 @@
 
 typeset -A errMsgIdx
 erridx=1
-errors=("")
+errMsgIdx=()
+errorList=("")
 
 add_error() {
   local CODE=$1 MSG="$2"
-  errors+=( "$MSG" )
+  errorList+=( "$MSG" )
   errMsgIdx[$CODE]=$((erridx++))
 }
 
@@ -18,7 +19,7 @@ warn() { # __ $1 = Code , $2 = hint for no-error return code
     echo "NO_PARTICULAR error" >&2
     retval=${2:-0}
   else
-    echo $1": ${errors[$n]}" >&2
+    echo $1": ${errorList[$n]}" >&2
     retval=$n
   fi
   return $retval
