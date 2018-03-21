@@ -99,3 +99,19 @@ f_slurm_install ()
 
   [ $? -eq 0 ] || warn SLURM_INSTALL
 }
+
+# ----------- main ---------------
+
+f_munge_build           || exit $?
+
+f_munge_user_install    || exit $?
+
+f_munge_start           || exit $?
+
+f_munge_install         || exit $?
+
+f_slurm_build           || exit $?
+
+f_slurm_config          || exit $?
+
+f_slurm_install         || exit $?        
