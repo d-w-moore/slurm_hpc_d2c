@@ -1,0 +1,316 @@
+pgrep update-mana
+pgrep update-mana -fl
+sudo update-manager
+sudo software-center
+jobs
+software-properties-gtk 
+sudo apt-get update
+echo $?
+sudo update-manager
+ping google.com
+sudo update-manager
+cd
+cd Pictures/
+ls -lrt
+eog Screenshot\ from\ 2018-01-26\ 06\:49\:50.png 
+cd /usr/lib/x86_64-linux-gnu/
+ls
+sudo apt-get install zlib1g-dev libssl-dev
+echo $?
+git
+mkdir ~/Desktop/Notes
+geditd ~/Desktop/Notes/20180126_ub14_fresh_install.txt
+sudo apt-get install gedit
+gedit ~/Desktop/Notes/20180126_ub14_fresh_install.txt
+echo $'\n== ==' >> ~/Desktop/Notes/20180126_ub14_fresh_install.txt
+history >> ~/Desktop/Notes/20180126_ub14_fresh_install.txt
+vi ~/Desktop/Notes/20180126_ub14_fresh_install.txt
+echo $LDFLAGS 
+cd /usr/lib/x86_64-linux-gnu/
+ls
+cd
+firefox
+wget http://www.python.org/ftp/python/2.6.9/Python-2.6.9.tgz
+ls -lrt
+tar xzf Python-2.6.9.tgz 
+cd Python-2.6.9/
+mkdir ~/py269
+LDFLAGS="-L"/usr/lib/x86_64-linux-gnu/
+echo $LDFLAGS 
+history
+history |head -10 >>~/Desktop/Notes/20180126_ub14_fresh_install.txt 
+vi ~/Desktop/Notes/20180126_ub14_fresh_install.txt 
+history |tail -17 >>~/Desktop/Notes/20180126_ub14_fresh_install.txt 
+vi ~/Desktop/Notes/20180126_ub14_fresh_install.txt 
+ls
+bash
+export LDFLAGS="-L"/usr/lib/x86_64-linux-gnu/
+bash
+export LDFLAGS="-L"/usr/lib/x86_64-linux-gnu
+echo $LDFLAGS 
+./configure  --prefix=/home/daniel/py269
+echo $?
+make -j3
+make install
+echo $?
+~/py269/bin/python
+history
+echo $'\n======' >>~/Desktop/Notes/20180126_ub14_fresh_install.txt 
+vi ~/Desktop/Notes/20180126_ub14_fresh_install.txt 
+echo $'\t' === `date +%F:%T` === >> ~/Desktop/Notes/20180126_ub14_fresh_install.txt 
+vi ~/Desktop/Notes/20180126_ub14_fresh_install.txt 
+echo >> ~/Desktop/Notes/20180126_ub14_fresh_install.txt 
+firefox
+bg
+cd
+cd Desktop/Notes/
+ls
+cat >>20180126_ub14_fresh_install.txt 
+ls -lrt
+vi 20180126_ub14_fresh_install.txt 
+bg
+fg %2
+more 20180126_ub14_fresh_install.txt 
+firefox
+bg
+wget https://raw.github.com/pypa/pip/master/contrib/get-pip.py
+ls get-pip.py 
+ls
+which python
+export PATH=~/py269/bin:$PATH
+which python
+python get-pip.py 
+wget https://bootstrap.pypa.io/get-pip.py
+ls -lrt
+mv get-pip.py.1  new-get-pip.py
+python new-get-pip.py 
+cat >>20180126_ub14_fresh_install.txt 
+vi 20180126_ub14_fresh_install.txt 
+history 
+cd
+cd py269/
+ls
+cd bin
+ls
+exit
+pip
+sudo apt-get install python-pip
+sudo -H pip install --upgrade pip
+which pip
+PATH=~/py269/bin/:$PATH
+which python
+gedit Desktop/Notes/20180126_ub14_fresh_install.txt 
+nautilus .
+find * -mtime -1 -iname '*txt'
+find Desktop/ -mtime -1 -iname '*txt'
+cd Desktop/Notes/
+ls -lrt
+firefox
+history >history.txt
+less history.txt
+locate jemall
+wget http://download.redis.io/releases/redis-4.0.7.tar.gz
+ls
+tar xf redis-4.0.7.tar.gz 
+cd redis-4.0.7/
+ls
+make
+./src/redis-server 
+ls -lrt
+cd 
+dpkg -l '.*x32.*'
+apt-cache search '*x32*'
+apt-cache search '.*x32.*'
+apt-cache search '.*x32.*'|grep lib
+apt-cache search '.*x32.*'|grep lib|less
+gcc -v
+apt-cache search '.*x32.*'|grep lib|less
+htop
+sudo apt-get install htop
+htop
+pgrep -afl make
+exit
+sudo su - 
+wget https://cache.ruby-lang.org/pub/ruby/2.4/ruby-2.4.3.tar.gz
+irb
+ruby
+tar xzf ruby-2.4.3.tar.gz 
+cd ruby-2.4.3/
+mkdir ~/ruby_2.4.3 && ./configure  --prefix=~/ruby_2.4.3
+mkdir ~/ruby_2.4.3 && ./configure  --prefix=$HOME/ruby_2.4.3
+./configure  --prefix=$HOME/ruby_2.4.3
+echo $?
+make
+echo $?
+make install
+cd ..
+git clone http://github.com/progit/progit2
+sudo apt-get install git
+git clone http://github.com/progit/progit2
+ls
+git clone http://github.com/progit/progit2
+cd progit2/
+git checkout
+more README.asc 
+PATH=~/ruby_2.4.3/bin/:$PATH 
+irb
+gem install bundler
+hash -r
+which bundle
+bundle install
+echo $?
+bundle exec rake book:build
+history >~/history.txt
+cat >>~/history.txt 
+gedit ~/history.txt 
+cd
+evince progit2.progit.pdf
+cd progit2/
+ls
+ls -lrt
+file *pdf
+evince progit.pdf 
+pkill nautilus
+nautilus
+bg
+exit
+nautilus progit
+nautilus progit2/
+find * -iname '*progit*'
+cd progit2/
+ls
+more C-git-commands.asc 
+nautilus ./*pdf
+sudo update-software-center 
+sudo update-manager
+history >history.txt
+grep qpid history.txt 
+ls /etc/irods
+sudo su -
+bc -l
+ls -lrt
+rm -fr py269
+rm -fr ruby*2.4.3
+ls -lrt
+rm -fr Python-2.6.9
+cd
+cd Downloads/
+cd
+rm -fr redis-4.0.7
+ls -lrt
+ls hub
+ls Music/
+cd Downloads/
+ls -lrt
+cd
+ls -lart
+cd Downloads/
+ls -lrt
+cd
+ls -lrt
+ls bin
+exit
+srun
+exit
+history
+exit
+sudo su - update
+sudo apt update
+sudo visudo
+sudo apt update
+sudo apt-get -y install git g++ make python-dev help2man unixodbc libfuse-dev libcurl4-gnutls-dev libbz2-dev zlib1g-dev libpam0g-dev libssl-dev libxml2-dev libkrb5-dev unixodbc-dev libjson-perl python-psutil python-jsonschema super python-exif odbc-postgresql
+echo $?
+git clone https://github.com/irods/irods_training
+cat >>.bashrc 
+exit
+ls
+vi .bashrc 
+git
+exit
+grep irods /etc/passwd
+firefox
+ls
+cd
+cd irods_training/
+cd advanced/hpc_data_to_compute/
+ls
+vi thumbnail_configuration.re 
+sudo apt-get -y install postgresql
+sudo su - postgres
+exit
+wget -qO - https://packages.irods.org/irods-signing-key.asc | sudo apt-key add -
+echo "deb [arch=amd64] https://packages.irods.org/apt/ $(lsb_release -sc) main" |   sudo tee /etc/apt/sources.list.d/renci-irods.list
+sudo apt-get update
+sudo apt-get -y install irods-server irods-database-plugin-postgres
+sudo python /var/lib/irods/scripts/setup_irods.py
+sudo python /var/lib/irods/scripts/setup_irods.py < /var/lib/irods/packaging/localhost_setup_postgres.input 
+exit
+https://github.com/d-w-moore/ubuntu14_slurm_install
+cd
+git clone https://github.com/d-w-moore/ubuntu14_slurm_install
+cd ubuntu14_slurm_install/
+vi install.sh 
+./install.sh 
+ls /var/run/munge/
+ls -lart /var/run/munge
+ls -lartd /var/run/munge
+ls -latrd /var/log/munge/
+ls -lrt /var/run/munge/ 
+cd 
+cd ubuntu14_slurm_install/
+ls
+vi install.sh 
+git status
+vi install.sh
+git diff
+git add install.sh 
+git diff
+git commit -t 'added chown of /var/run/munge'
+git config --global user.email dmoore@renci.org
+git config --global user.name d-w-moore
+ls -lrt
+git commit -t 'added chown of /var/run/munge'
+git commit  -m 'added chown munge.munge /var/run/munge'
+git push
+ls
+more install.sh 
+vi install.sh 
+TERM=vt100 vi install.sh 
+grep ^munge /etc/passwd
+ls -l /var/run/munge -d
+sudo su
+cd
+sudo su -
+cd
+cd ubuntu14_slurm_install/
+ls
+vi install.sh 
+grep MUNGED_ *
+sudo pkill munged
+git status
+git diff
+grep munge_install *
+vi install.sh
+git diff
+git add install.sh 
+git diff
+git add errors.rc 
+git commit -m "improved error key (MUNGED_PERSIST) and corresp. func name"
+git push
+ls -lrt
+cd ubuntu14_slurm_install/
+ls -lrt
+pgrep munged
+git status
+tig
+git pull
+tig
+sudo apt install tig
+tig
+ls -lrt
+vi install.sh 
+history|less
+git status
+git diff
+git add .
+git diff

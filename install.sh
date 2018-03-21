@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# ----------------------------------------------------------------------
+#  Modify u14/iRODS system for running data-to-compute example on SLURM
+# ----------------------------------------------------------------------
+
 DIR=$(dirname "$0")
 . "$DIR/errors.rc"
 
